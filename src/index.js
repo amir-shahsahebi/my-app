@@ -7,6 +7,8 @@ function getButtonText() {
 }
 // Create a react component
 const App = () => {
+    const buttonText = {text: "click me"}
+    const style = { backgroundColor: 'red', color: 'white' }
   return (
     <div>
       <label className="label" for="name">
@@ -14,7 +16,7 @@ const App = () => {
       </label>
       <input id="name" type="text" />
       {/* <button style="background-color: red; color:white">Submit</button> */}
-      <button style={{ backgroundColor: 'red', color: 'white' }}>{getButtonText()}</button>
+      <button style={style}>{buttonText.text}</button>
     </div>
   );
 };
