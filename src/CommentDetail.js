@@ -1,24 +1,23 @@
-import React  from "react";
-import faker from "@faker-js/faker";
+import React from "react";
 
-const CommentDetail = props => {
-    console.log(props);
-    return (
-      <div className="comment">
-        <a href="/" className="avatar">
-          <img alt="avatar" src={faker.image.avatar()} />
+const CommentDetail = (props) => {
+  console.log(props);
+  return (
+    <div className="comment">
+      <a href="/" className="avatar">
+        <img alt="avatar" src={props.imgLink} />
+      </a>
+      <div className="content">
+        <a href="/" className="author">
+          {props.author}
         </a>
-        <div className="content">
-          <a href="/" className="author">
-            {props.author}
-          </a>
-          <div className="metadata">
-            <span className="date">{props.timeAgo}</span>
-          </div>
-          <div className="text">Good post</div>
+        <div className="metadata">
+          <span className="date">{props.timeAgo}</span>
         </div>
+        <div className="text">{props.comment}</div>
       </div>
-    );
-}
+    </div>
+  );
+};
 
 export default CommentDetail;
