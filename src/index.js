@@ -1,26 +1,26 @@
-// import the react and ReactDOM libraries
 import React from "react";
 import ReactDOM from "react-dom";
+import faker from "@faker-js/faker";
 
-function getButtonText() {
-    return 'Click on me!'
-}
-// Create a react component
 const App = () => {
-    const buttonText = {text: "click me"}
-    const style = { backgroundColor: 'red', color: 'white' }
-    const labelText = "Enter Name";
   return (
-    <div>
-      <label className="label" htmlFor="name">
-        {labelText}
-      </label>
-      <input id="name" type="text" />
-      {/* <button style="background-color: red; color:white">Submit</button> */}
-      <button style={style}>{buttonText.text}</button>
+    <div className="ui container comments">
+      <din className="comment">
+        <a href="/" className="avatar">
+          <img alt="avatar" src={faker.image.avatar()} />
+        </a>
+        <div className="content">
+          <a href="/" className="author">
+            Sam
+          </a>
+          <div className="metadata">
+            <span className="date">Today at 8:00AM</span>
+          </div>
+          <div className="text">Good post</div>
+        </div>
+      </din>
     </div>
   );
 };
 
-// take the react component and show it on the screen
 ReactDOM.render(<App />, document.querySelector("#root"));
