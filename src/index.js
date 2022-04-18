@@ -1,66 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import faker from "@faker-js/faker";
+// import faker from "@faker-js/faker";
+import CommentDetail from "./CommentDetail";
 
 const App = () => {
   return (
     <div className="ui container comments">
-      <din className="comment">
-        <a href="/" className="avatar">
-          <img alt="avatar" src={faker.image.avatar()} />
-        </a>
-        <div className="content">
-          <a href="/" className="author">
-            Sam
-          </a>
-          <div className="metadata">
-            <span className="date">Today at 8:00AM</span>
-          </div>
-          <div className="text">Good post</div>
-        </div>
-      </din>
-      <din className="comment">
-        <a href="/" className="avatar">
-          <img alt="avatar" src={faker.image.avatar()} />
-        </a>
-        <div className="content">
-          <a href="/" className="author">
-            Sam
-          </a>
-          <div className="metadata">
-            <span className="date">Today at 8:00AM</span>
-          </div>
-          <div className="text">Good post</div>
-        </div>
-      </din>
-      <din className="comment">
-        <a href="/" className="avatar">
-          <img alt="avatar" src={faker.image.avatar()} />
-        </a>
-        <div className="content">
-          <a href="/" className="author">
-            Sam
-          </a>
-          <div className="metadata">
-            <span className="date">Today at 8:00AM</span>
-          </div>
-          <div className="text">Good post</div>
-        </div>
-      </din>
-      <din className="comment">
-        <a href="/" className="avatar">
-          <img alt="avatar" src={faker.image.avatar()} />
-        </a>
-        <div className="content">
-          <a href="/" className="author">
-            Sam
-          </a>
-          <div className="metadata">
-            <span className="date">Today at 8:00AM</span>
-          </div>
-          <div className="text">Good post</div>
-        </div>
-      </din>
+      <CommentDetail author="Sam" timeAgo="Today at 4:25pm" />
+      <CommentDetail author="Gimy" timeAgo="Yesterday at 4:25pm" />
+      <CommentDetail author="Amir" timeAgo="Today at 1:00pm" />
     </div>
   );
 };
