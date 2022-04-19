@@ -1,26 +1,37 @@
-// import the react and ReactDOM libraries
 import React from "react";
 import ReactDOM from "react-dom";
+import SeasonDisplay from "./SeasonDisplay";
 
-function getButtonText() {
-    return 'Click on me!'
-}
-// Create a react component
-const App = () => {
-    const buttonText = {text: "click me"}
-    const style = { backgroundColor: 'red', color: 'white' }
-    const labelText = "Enter Name";
-  return (
-    <div>
-      <label className="label" htmlFor="name">
-        {labelText}
-      </label>
-      <input id="name" type="text" />
-      {/* <button style="background-color: red; color:white">Submit</button> */}
-      <button style={style}>{buttonText.text}</button>
-    </div>
-  );
-};
+class App extends React.Component {
+  constructor(props) {
+    super();
+    // super(props);
+    // this is the only time we do direct assignment to this.state
+    this.state = { lat: null , errorMessage: "" };
 
-// take the react component and show it on the screen
-ReactDOM.render(<App />, document.querySelector("#root"));
+    window.navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // we called setstate!!!
+        this.setState({ lat: position.coords.latitude });
+      },
+      (err) => {
+        this.setState({ errorMessage: err.message })
+      }
+    );
+  }
+
+  // React says we have to define render!!
+  render() {
+      if (this.state.errorMessage && !this.state.lat) {
+        return <div>Error: {this.state.errorMessage}</div>;
+      } 
+
+      if (!this.state.errorMessage && this.state.lat) {
+        return <div>Latitude: {this.state.lat}</div>;
+      }
+
+      return <div>Loading!</div>;
+    }
+  }
+    
+    ReactDOM.render(<App />, document.querySelector("#root"));
