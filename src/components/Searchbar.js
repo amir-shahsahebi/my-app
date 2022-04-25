@@ -2,11 +2,12 @@ import React from "react";
 
 class Searchbar extends React.Component {
   state = { term: "" };
-
+  // we use arrow function in event function because "this" in arrow function refer to the "Searchbar" class and if we use function deceleration, it returned undefined
   onFormSubmit = (e) => {
   e.preventDefault()  
-  console.log(this.state.term);
-  console.log(this);
+  this.props.onSubmit(this.state.term); // in App.js we define props and we can fill it with this.props.submit and assign it with this.state.term
+  // console.log(this.state.term);
+  // console.log(this);
   }
 
   // onFormSubmit(e) {
