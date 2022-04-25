@@ -1,18 +1,27 @@
 import React from "react";
 
-class Searchbaer extends React.Component {
+class Searchbar extends React.Component {
+  state = { term: "" };
 
-  onInputChange() {
-
+  onFormSubmit = (e) => {
+  e.preventDefault()  
+  console.log(this.state.term);
+  console.log(this);
   }
+
+  // onFormSubmit(e) {
+  // e.preventDefault()  
+  // console.log(this);
+  // }
 
   render() {
     return (
       <div className="ui segment">
-        <form className="ui form">
+        <form onSubmit={this.onFormSubmit} className="ui form">
           <div className="field">
-              <label>Image search</label>
-            <input type="text" onChange= {this.onInputChange}/>
+            <label>Image search</label>
+            <input type="text" value={this.state.term} onChange={(e) => this.setState({term: e.target.value})} />
+            <div>{this.state.term.length < 5 ? "must grather than 4" : "correct"}</div>
           </div>
         </form>
       </div>
@@ -20,4 +29,4 @@ class Searchbaer extends React.Component {
   }
 }
 
-export default Searchbaer;
+export default Searchbar;
