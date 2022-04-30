@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { clear } from "@testing-library/user-event/dist/clear";
 
 const Search = () => {
   const [term, setTerm] = useState("");
@@ -44,7 +43,7 @@ const Search = () => {
 
     return () => {
       console.log("cleanUp");
-      clear;
+      clearTimeout(timeoutId);
     };
 
     // console.log("I run after every render");
