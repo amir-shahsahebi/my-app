@@ -9,11 +9,11 @@ const Search = () => {
 
   useEffect(() => {
     const timerId = setTimeout(() => {
-      setDebouncedTerm(term);
+      setDebouncedTerm(term); // instead of "setDebouncedTerm", if we have any state like "debouncedTerm", we give an error that tell us to set the variable in the bracket of the end [] and if we do it, we will have another bugs, so we solved this with defining two statement
     }, 1000);
 
     return () => {
-      clearTimeout(timerId);
+      clearTimeout(timerId); // we run this cleanUp function in order to if user continue to typing, cancel the setTimeout function and just updated "DebouncedTerm" when user dont type anything.
     };
   }, [term]);
 
