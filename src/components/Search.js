@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Search = () => {
-  const [term, setTerm] = useState("");
+  const [term, setTerm] = useState("apple");
   const [results, setResults] = useState([]);
   console.log(results);
 
@@ -34,17 +34,22 @@ const Search = () => {
       setResults(data.query.search);
     };
 
-    const timeoutId = setTimeout(() => {
-      if (term) {
-        search();
-      }
-    }, 1000);
-    console.log("regular render done");
+    if (term && !results.length) {
+      // we suse this condition for when the page loaded for first time and we wand to dont have any delay for searching "apple" (first term that we set)
+      search();
+    } else {
+      const timeoutId = setTimeout(() => {
+        if (term) {
+          search();
+        }
+      }, 1000);
+      // console.log("regular render done");
 
-    return () => {
-      console.log("cleanUp");
-      clearTimeout(timeoutId);
-    };
+      return () => {
+        console.log("cleanUp");
+        clearTimeout(timeoutId);
+      };
+    }
 
     // console.log("I run after every render");
   }, [term]); // [] => only run once,, "nothing" => run once and every time that rerendered,, [term]=> once && rerender && "term" changed
