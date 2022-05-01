@@ -3,24 +3,21 @@ import axios from "axios";
 
 const Search = () => {
   const [term, setTerm] = useState("apple");
+  const [debouncedTerm, setDebouncedTerm] = useState(term);
   const [results, setResults] = useState([]);
   console.log(results);
 
   useEffect(() => {
-    // let step1 = term;
-    // let step2 = "";
-    // console.log(step1);
-    // setTimeout(() => {
-    //   step2 = term;
-    //   console.log(step2);
-    //   if (step1 === step2) {
-    //       console.log("okkkkkkkk");
-    //   }
-    // }, 1000);
+    const timerId = setTimeout(() => {
+      setDebouncedTerm(term);
+    }, 1000);
 
-    // if (step1 === step2) {
-    // }
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [term]);
 
+  useEffect(() => {
     const search = async () => {
       const { data } = await axios.get("https://en.wikipedia.org/w/api.php", {
         params: {
@@ -28,31 +25,62 @@ const Search = () => {
           list: "search",
           origin: "*",
           format: "json",
-          srsearch: term,
+          srsearch: debouncedTerm,
         },
       });
       setResults(data.query.search);
     };
 
-    if (term && !results.length) {
-      // we suse this condition for when the page loaded for first time and we wand to dont have any delay for searching "apple" (first term that we set)
-      search();
-    } else {
-      const timeoutId = setTimeout(() => {
-        if (term) {
-          search();
-        }
-      }, 1000);
-      // console.log("regular render done");
+    search();
+  }, [debouncedTerm]);
 
-      return () => {
-        console.log("cleanUp");
-        clearTimeout(timeoutId);
-      };
-    }
+  // useEffect(() => {
+  // let step1 = term;
+  // let step2 = "";
+  // console.log(step1);
+  // setTimeout(() => {
+  //   step2 = term;
+  //   console.log(step2);
+  //   if (step1 === step2) {
+  //       console.log("okkkkkkkk");
+  //   }
+  // }, 1000);
 
-    // console.log("I run after every render");
-  }, [term]); // [] => only run once,, "nothing" => run once and every time that rerendered,, [term]=> once && rerender && "term" changed
+  // if (step1 === step2) {
+  // }
+
+  // const search = async () => {
+  //   const { data } = await axios.get("https://en.wikipedia.org/w/api.php", {
+  //     params: {
+  //       action: "query",
+  //       list: "search",
+  //       origin: "*",
+  //       format: "json",
+  //       srsearch: term,
+  //     },
+  //   });
+  //   setResults(data.query.search);
+  // };
+
+  //   if (term && !results.length) {
+  //     // we suse this condition for when the page loaded for first time and we wand to dont have any delay for searching "apple" (first term that we set)
+  //     search();
+  //   } else {
+  //     const timeoutId = setTimeout(() => {
+  //       if (term) {
+  //         search();
+  //       }
+  //     }, 1000);
+  //     // console.log("regular render done");
+
+  //     return () => {
+  //       console.log("cleanUp");
+  //       clearTimeout(timeoutId);
+  //     };
+  //   }
+
+  //   // console.log("I run after every render");
+  // }, [term, results.length]); // [] => only run once,, "nothing" => run once and every time that rerendered,, [term]=> once && rerender && "term" changed
 
   const renderedResults = results.map((result) => {
     return (
