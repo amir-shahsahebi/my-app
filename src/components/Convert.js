@@ -31,7 +31,7 @@ const Convert = ({ language, text }) => {
     doTranslation();
     console.log(translated);
     // console.log("new langiage or text");
-  }, [language, debouncedText]);
+  }, [language, debouncedText]); //this called dependency array
   return <h1 className="ui header">{translated}</h1>;
 };
 
