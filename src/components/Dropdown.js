@@ -4,7 +4,13 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    document.body.addEventListener(() => console.log("Clicked"));
+    document.body.addEventListener(
+      "click",
+      () => {
+        setOpen(false);
+      },
+      { capture: true }
+    );
   }, []);
 
   const renderedOptions = options.map((option) => {
