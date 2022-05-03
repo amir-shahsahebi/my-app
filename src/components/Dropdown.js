@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const Dropdown = ({ options, selected, onSelectedChange }) => {
   const [open, setOpen] = useState(false);
+  const ref = useRef();
 
   useEffect(() => {
     document.body.addEventListener(
+      //eventListener just get called first and then React listener called
       "click",
-      () => {
+      (e) => {
+        console.log(e.target, "BODY Clicked");
         setOpen(false);
       },
-      { capture: true }
+      { capture: true } // capture:true => means that opposite of bubbling
     );
   }, []);
 
@@ -22,19 +25,25 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
       <div
         key={option.value}
         className="item"
-        onClick={() => onSelectedChange(option)}
+        onClick={() => {
+          console.log("ITEM Clicked");
+          onSelectedChange(option);
+        }}
       >
         {option.label}
       </div>
     );
   });
-
+  console.log(ref.current);
   return (
-    <div className="ui form">
+    <div ref={ref} className="ui form">
       <div className="field">
         <label className="label">Select a color</label>
         <div
-          onClick={() => setOpen(!open)}
+          onClick={() => {
+            console.log("DropDownClicked");
+            setOpen(!open);
+          }}
           className={`ui selection dropdown ${open ? "visible active" : ""}`}
         >
           <i className="dropdown icon"></i>
