@@ -1,5 +1,5 @@
-import React from "react";
-import Dropdown from "./DropDown";
+import React, { useState } from "react";
+import Dropdown from "./Dropdown";
 
 const options = [
   {
@@ -17,9 +17,15 @@ const options = [
 ];
 
 const Translate = () => {
+  const [language, setLanguage] = useState(options[0]);
   return (
     <div>
-      <Dropdown />
+      <Dropdown
+        label="Select a Language"
+        selected={language}
+        onSelectedChange={setLanguage}
+        options={options}
+      />
     </div>
   );
 };
