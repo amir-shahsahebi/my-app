@@ -9,10 +9,16 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
       //eventListener just get called first and then React listener called
       "click",
       (e) => {
-        console.log(e.target, "BODY Clicked");
+        // console.dir(ref.current);
+        if (ref.current.contains(e.target)) {
+          // contains is a function that check its meaning :)
+          return;
+        }
+
+        // console.log(e.target, "BODY Clicked");
         setOpen(false);
       },
-      { capture: true } // capture:true => means that opposite of bubbling
+      { capture: false } // capture:true => means that opposite of bubbling //<=> after useRef we can delete that
     );
   }, []);
 
@@ -26,7 +32,7 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
         key={option.value}
         className="item"
         onClick={() => {
-          console.log("ITEM Clicked");
+          // console.log("ITEM Clicked");
           onSelectedChange(option);
         }}
       >
@@ -34,14 +40,13 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
       </div>
     );
   });
-  console.log(ref.current);
   return (
     <div ref={ref} className="ui form">
       <div className="field">
         <label className="label">Select a color</label>
         <div
           onClick={() => {
-            console.log("DropDownClicked");
+            // console.log("DropDownClicked");
             setOpen(!open);
           }}
           className={`ui selection dropdown ${open ? "visible active" : ""}`}
