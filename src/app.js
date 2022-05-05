@@ -4,6 +4,7 @@ import Search from "./components/Search";
 import Dropdown from "./components/Dropdown";
 import Translate from "./components/Translate";
 import Route from "./components/Route";
+import Header from "./components/Header";
 
 const items = [
   {
@@ -67,7 +68,7 @@ const App = () => {
           onSelectedChange={setSelected}
         />
       ) : null} */}
-
+      <Header />
       <Route path="/">
         {/* when we put a jsx inside a component it define as prop of children */}
         <Accordion items={items} />
